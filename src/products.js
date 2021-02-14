@@ -31,7 +31,7 @@ const products = [
       'brand': 'LYM',
       'category': 'hair',
       'price': 5.99,
-      'countInStock': 10,
+      'countInStock': 0,
       'rating': 3,
       'numReviews': 5,
     },

@@ -73,6 +73,9 @@ function Rating({ value, text, color}) {
 
                 </i>
             </span>
+
+            {/* if text exists then add it if it dones't don't add it */}
+            <span>{text && text}</span>
         </div>
     )
 }

@@ -1,3 +1,13 @@
 main{ 
   min-height: 85vh;
 }
+
+h4, h3{
+  padding: 1rem 0;
+}
+
+
+/* the margin is adding some space between the stars */
+.rating span{
+ margin: 0.1rem;
+}
