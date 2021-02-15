@@ -1,11 +1,25 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Product from '../components/Product';
+import axios from 'axios'
 
-// this imports the array from that file
-import products from '../products'
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
 
 function Home() {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        
+        async function fetchProducts(){
+            const { data } = await axios.get(`${REACT_APP_SERVER_URL}/api/products/`)
+            setProducts(data)
+        }
+
+        fetchProducts()
+
+    }, [])
+    
     return (
         <div>
             <h1> The Waviest </h1>
