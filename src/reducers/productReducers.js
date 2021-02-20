@@ -1,7 +1,12 @@
 import { 
+    //list
     PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
-    PRODUCT_LIST_FAIL 
+    PRODUCT_LIST_FAIL,
+    //details
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS,
+    PRODUCT_DETAILS_FAIL 
 } from '../constants/productConstants'
 
 export const productListReducer = ( state = { products:[] }, action) => {
@@ -15,6 +20,26 @@ export const productListReducer = ( state = { products:[] }, action) => {
             return { loading: false, products: action.payload }
 
         case PRODUCT_LIST_FAIL:
+            return { loading: false, error: action.payload }
+
+        //if this doesn't match any of the cases it will return the same state
+        default:
+            return state
+    }
+}
+
+
+export const productDetailsReducer = ( state = { product: { reviews:[] } }, action) => {
+    //this will switch between action types depending on the action type
+    
+    switch(action.type){
+        case PRODUCT_DETAILS_REQUEST:
+            return { loading: true, ...state }
+
+        case PRODUCT_DETAILS_SUCCESS:
+            return { loading: false, product: action.payload }
+
+        case PRODUCT_DETAILS_FAIL:
             return { loading: false, error: action.payload }
 
         //if this doesn't match any of the cases it will return the same state

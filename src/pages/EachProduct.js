@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import axios from 'axios'
+import { listProductDetails } from '../actions/productActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+
+
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 function EachProduct({ match }) {
-    const [product, setProduct] = useState([])
+    const dispatch = useDispatch()
+    const productDetails = useSelector(state => state.productDetails)
+    const {loading, error , product} = productDetails
 
     useEffect(() => {
-        
-        async function fetchProduct(){
-            console.log('THIS COMES FIRST')
-            const { data } = await axios.get(`${REACT_APP_SERVER_URL}/api/products/${match.params.id}/`)
-            console.log(data, 'is this working')
-            setProduct(data)
-        }
+        dispatch(listProductDetails( match.params.id ))
+    }, [dispatch, match])    
 
-        fetchProduct()
-
-    }, [])    
 
 
     return (
         <div>
-            <Row>
+            {loading ?
+                <Loader />
+                :error
+                ? <Message variant='danger'>{error}</Message> 
+                :(
+                    <Row>
                 <Col md={6}>
                     <Image src={product.image} alt={product.name} fluid />
                 </Col>
@@ -82,6 +86,12 @@ function EachProduct({ match }) {
                     </Card>
                 </Col>
             </Row>
+            )
+                
+            
+            }
+  
+            
             <Link to='/' className='btn btn-light my-3'>Home</Link>
         </div>
     )
