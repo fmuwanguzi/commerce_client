@@ -8,7 +8,7 @@ function Product({ product }) {
     return (
         <Card className="my-3 py-3 rounded">
             <Link to={`/product/${product._id}`}>
-                <Card.Img src={product.image}  />
+                <Card.Img src={product.image} height={240} width={171} />
             </Link>
             <Card.Body>
                 <Link to={`/product/${product._id}`}>

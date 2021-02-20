@@ -14,7 +14,7 @@ export const listProducts = () => async ( dispatch ) => {
         dispatch({ type: PRODUCT_LIST_REQUEST })
         
         const { data } = await axios.get(`${REACT_APP_SERVER_URL}/api/products/`)
-        console.log('this is data from the api', data)
+        console.log('this is product data from the api', data)
         
         dispatch({ 
             type: PRODUCT_LIST_SUCCESS,
