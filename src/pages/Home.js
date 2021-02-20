@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector  } from 'react-redux'
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
-import axios from 'axios'
+import { listProducts } from '../actions/productActions'
 
-const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
 
 
 function Home() {
-    const [products, setProducts] = useState([])
+    const dispatch = useDispatch()
+    const productList = useSelector(state => state.productList)
+    const { error, loading, products } = productList
+    
 
     useEffect(() => {
-        
-        async function fetchProducts(){
-            const { data } = await axios.get(`${REACT_APP_SERVER_URL}/api/products/`)
-            setProducts(data)
-        }
-
-        fetchProducts()
+        dispatch(listProducts())
 
     }, [])
     
+
     return (
         <div>
             <h1> The Waviest </h1>
