@@ -11,7 +11,7 @@ import Message from '../components/Message'
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-function EachProduct({ match }) {
+function EachProduct({ match, history }) {
     const [qty, setQty] = useState(1)
 
 
@@ -21,9 +21,13 @@ function EachProduct({ match }) {
 
     useEffect(() => {
         dispatch(listProductDetails( match.params.id ))
-    }, [dispatch, match])    
+    }, 
+    [dispatch, match])    
 
-
+    const addToCartHandler = () => {
+        console.log('Add to cart')
+        history.push(`/cart/${match.params.id}?qty=${qty}`)
+    }
 
     return (
         <div>
@@ -103,7 +107,15 @@ function EachProduct({ match }) {
 
                             <ListGroup.Item>
                                 {/* disabled has a conditional that makes the button unclickable when out of stock */}
-                                <Button className="btn-block" disabled={ product.countInStock == 0 } type='button'>Add to cart</Button>
+                                <Button 
+                                    onClick={addToCartHandler}
+                                    className="btn-block" 
+                                    disabled={ product.countInStock == 0 } 
+                                    type='button'
+                                    
+                                    >Add to cart
+                                    
+                                    </Button>
                             </ListGroup.Item>
 
                         </ListGroup>

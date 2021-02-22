@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 //pages
 import Home from "./pages/Home";
 import EachProduct from "./pages/EachProduct";
+import Cart from './pages/Cart'
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
 
           <Route exact path='/'  component={Home}/>
           <Route path='/product/:id' component={EachProduct}/>
+          
+          {/* the question mark after the id means that you don't always have to put an id */}
+          <Route path='/cart/:id?' component={Cart}/>
 
         </Container>
       </main>
