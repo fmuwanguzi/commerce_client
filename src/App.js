@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import Home from "./pages/Home";
 import EachProduct from "./pages/EachProduct";
 import Cart from './pages/Cart'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -19,10 +20,13 @@ function App() {
         <Container>
 
           <Route exact path='/'  component={Home}/>
+          <Route path='/login'  component={Login}/>
+          
           <Route path='/product/:id' component={EachProduct}/>
           
           {/* the question mark after the id means that you don't always have to put an id */}
           <Route path='/cart/:id?' component={Cart}/>
+
 
         </Container>
       </main>
