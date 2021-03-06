@@ -19,7 +19,7 @@ import {
             return { loading: false, error: action.payload }
         
         case USER_LOGOUT:
-            return { } //resets the state so no user 
+            return {} //resets the state so no user 
 
         //if this doesn't match any of the cases it will return the same state
         default:
