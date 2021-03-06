@@ -21,8 +21,8 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            `${REACT_APP_SERVER_URL}/api/users/login/
-            {'username' : email, 'password'}`,
+            `${REACT_APP_SERVER_URL}/api/users/login/`,
+            {'username' : email, 'password': password},
             config
         )
 
