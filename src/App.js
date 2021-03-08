@@ -12,6 +12,7 @@ import EachProduct from "./pages/EachProduct";
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/'  component={Home}/>
           <Route path='/login'  component={Login}/>
           <Route path='/register'  component={Register}/>
+          <Route path='/profile'  component={Profile}/>
           
           <Route path='/product/:id' component={EachProduct}/>
           

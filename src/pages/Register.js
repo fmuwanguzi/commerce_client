@@ -103,6 +103,7 @@ function Register({ location, history }) {
                     Sign up
                 </Button>
 
+                </Form>
                 <Row className='py-3'>
                 Already have an acount ? <Link 
                     to={redirect ? `/login?redirect=${redirect}` : '/login'}> 
@@ -110,7 +111,6 @@ function Register({ location, history }) {
                     </Link>
                 </Row>
 
-            </Form>
         </FormContainer>
     )
 }
