@@ -4,7 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { getUserDetails  } from '../actions/userActions'
+import { getUserDetails, updateUserProfile  } from '../actions/userActions'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 
 function Profile({ history }) {
@@ -22,6 +23,9 @@ function Profile({ history }) {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+    const { success } = userUpdateProfile
 
 
     useEffect(() => {
@@ -30,22 +34,30 @@ function Profile({ history }) {
             history.push('/login')
         }else{
         //if logged in we wilil get user information else if we have the info we will prefill the data
-            if( !user || !user.name ){
+            if( !user || !user.name || success){
+                dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
             } else {
                 setName(user.name)
                 setEmail(user.email)
             }
         }
-    },[dispatch ,history, userInfo, user])
+    },[dispatch ,history, userInfo, user, success])
 
     const submitHandler = (e) => {
         e.preventDefault()
         //if statement to make sure the password and confirm password match
         if(password != confirmPassword){
             setMessage('Passwords do not match please try again')
-        }else{
-            console.log('updating coming soon')
+        } else {
+            dispatch(updateUserProfile({ 
+                'id' : user._id,
+                'name' : name,
+                'email': email,
+                'password': password
+            }))
+            //removes the passwords don't match message once fixed
+            setMessage('')
         }
     } 
 

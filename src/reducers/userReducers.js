@@ -9,10 +9,15 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
-    //details for updating the user
+    //details to populate the profile page of the user
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
-    USER_DETAILS_FAIL
+    USER_DETAILS_FAIL,
+    //update the profile page
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL,
+    USER_UPDATE_PROFILE_RESET,
 
 } from '../constants/userConstants'
 
@@ -72,6 +77,28 @@ export const userDetailsReducer = ( state = { user: {} }, action) => {
 
         case USER_DETAILS_FAIL:
             return { loading: false, error: action.payload }
+        
+        //if this doesn't match any of the cases it will return the same state
+        default:
+            return state
+    }
+}
+
+export const userUpdateProfileReducer = ( state = { }, action) => {
+    //this will switch between action types depending on the action type
+    
+    switch(action.type){
+        case USER_UPDATE_PROFILE_REQUEST:
+            return { loading: true }
+
+        case USER_UPDATE_PROFILE_SUCCESS:
+            return { loading: false,  success: true , userInfo: action.payload }
+
+        case USER_UPDATE_PROFILE_FAIL:
+            return { loading: false, error: action.payload }
+
+        case USER_UPDATE_PROFILE_RESET:
+            return {}
         
         //if this doesn't match any of the cases it will return the same state
         default:
