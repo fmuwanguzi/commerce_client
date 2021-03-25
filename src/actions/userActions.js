@@ -182,7 +182,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             payload:data
         })
 
-        //update local storage with updated information
+        //update local storage with new user information
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     }catch(error){
